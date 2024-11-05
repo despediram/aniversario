@@ -10,12 +10,10 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      background-color: #fbeec1;
+      overflow-y: auto; /* Permite rolagem vertical */
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #fbeec1;
-      overflow: hidden;
     }
 
     /* Estilos do container da carta */
@@ -28,9 +26,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       overflow: hidden;
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 2s ease;
+      margin-top: 50px; /* Adiciona um pouco de espaço no topo */
     }
 
     /* Estilo do texto da carta */
@@ -72,12 +68,7 @@
       100% { transform: translateY(-100vh); opacity: 0; }
     }
 
-    /* Efeito de mostrar a carta ao clicar */
-    body.show-card .card {
-      transform: scaleY(1);
-    }
-
-    /* Efeito de mostrar o texto ao desenrolar a carta */
+    /* Efeito de mostrar o texto da carta */
     body.show-card .message {
       opacity: 1;
     }
@@ -116,20 +107,17 @@
 
   <!-- Contêiner da carta -->
   <div class="card">
-    <h1>Feliz aniversário minha gatinha</h1>
+    <h1>Feliz aniversário, minha gatinha</h1>
     <p class="message">
-      Hoje é o seu dia, e como eu queria estar ao seu lado para te encher de abraços, beijos e sorrisos. Não estar perto de você me deixa um pouco frustrado, e eu fico triste por não conseguir fazer algo maior ou te dar um presente à altura do quanto você merece. Mas eu espero que essas palavras, simples, mas sinceras, consigam expressar o quanto você é especial para mim, são palavras que vem do fundo do meu coração.
-
-Nesse aniversário, quero que saiba o quanto sou grato por ter você na minha vida. Você é alguém com quem quero construir memórias, sonhos e momentos que durem para sempre. Eu adoro o jeito como você me faz sorrir, mesmo a distância, como torna meus dias mais leves e minha vida mais feliz.
-
-Que esse novo ano traga para você muita felicidade, saúde e realizações. Que você se sinta amada, valorizada e que todos os seus sonhos comecem a se tornar realidade. Eu prometo que, apesar da distância, sempre estarei aqui, do seu lado em pensamento e de coração.
-
-Parabéns, meu amor. Você é a melhor coisa que já aconteceu na minha vida, e eu te amo com tudo que sou..<br><br>
+      Hoje é o seu dia, e como eu queria estar ao seu lado para te encher de abraços, beijos e sorrisos. Não estar perto de você me deixa um pouco frustrado, e eu fico triste por não conseguir fazer algo maior ou te dar um presente à altura do quanto você merece. Mas eu espero que essas palavras, simples, mas sinceras, consigam expressar o quanto você é especial para mim, são palavras que vem do fundo do meu coração.<br><br>
+      Nesse aniversário, quero que saiba o quanto sou grato por ter você na minha vida. Você é alguém com quem quero construir memórias, sonhos e momentos que durem para sempre. Eu adoro o jeito como você me faz sorrir, mesmo a distância, como torna meus dias mais leves e minha vida mais feliz.<br><br>
+      Que esse novo ano traga para você muita felicidade, saúde e realizações. Que você se sinta amada, valorizada e que todos os seus sonhos comecem a se tornar realidade. Eu prometo que, apesar da distância, sempre estarei aqui, do seu lado em pensamento e de coração.<br><br>
+      Parabéns, meu amor. Você é a melhor coisa que já aconteceu na minha vida, e eu te amo com tudo que sou.<br><br>
     </p>
   </div>
 
   <script>
-    // Função para ativar o efeito dos balões e desenrolar da carta ao clicar
+    // Função para ativar o efeito dos balões e exibir a carta ao clicar
     document.body.addEventListener('click', function() {
       document.body.classList.add('show-card');
     });
