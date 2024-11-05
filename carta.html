@@ -11,30 +11,61 @@
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #fbeec1;
-      overflow-y: auto; /* Permite rolagem vertical */
+      overflow-y: auto;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column; /* Alinhamento vertical */
     }
 
-    /* Estilos do container da carta */
-    .card {
+    /* Contêiner da carta */
+    .card-container {
       position: relative;
       width: 90%;
       max-width: 600px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-      margin-top: 50px; /* Adiciona um pouco de espaço no topo */
+      height: auto; /* Altura automática para permitir rolagem */
+      overflow: hidden; /* Esconde o conteúdo que excede a área */
+      margin: 20px 0;
     }
 
-    /* Estilo do texto da carta */
+    .card {
+      width: 100%;
+      background: #fffdf5;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #ddd;
+      font-family: 'Dancing Script', cursive;
+      color: #333;
+      overflow: hidden;
+      transform-origin: top;
+      transition: transform 1s ease;
+    }
+
+    .card.open {
+      transform: rotateX(0);
+    }
+
+    .card.closed {
+      transform: rotateX(-90deg);
+    }
+
+    /* Estilo do título e do texto da carta */
+    .card h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: #b85c5c;
+      text-align: center;
+      margin-top: 30px;
+    }
     .message {
       font-size: 1.2rem;
-      line-height: 1.6;
       opacity: 0;
-      transition: opacity 2s ease 1s;
+      transition: opacity 1s ease 1s;
+      padding: 20px;
+      display: none; /* Escondido inicialmente */
+      max-height: 300px; /* Altura máxima para a mensagem */
+      overflow-y: auto; /* Permitir rolagem dentro da mensagem */
     }
 
     /* Balões */
@@ -66,11 +97,6 @@
     @keyframes rise {
       0% { transform: translateY(0); opacity: 0.8; }
       100% { transform: translateY(-100vh); opacity: 0; }
-    }
-
-    /* Efeito de mostrar o texto da carta */
-    body.show-card .message {
-      opacity: 1;
     }
 
     /* Botão para voltar */
@@ -108,7 +134,18 @@
     .play-button:hover {
       background-color: #ff4040;
     }
+
+    /* Texto para instruções de play */
+    .play-instructions {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      font-size: 1rem;
+      color: #555;
+      text-align: center;
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -125,17 +162,20 @@
   </div>
 
   <!-- Contêiner da carta -->
-  <div class="card">
-    <h1>Feliz aniversário, minha gatinha</h1>
-    <p class="message">
-      Hoje é o seu dia, e como eu queria estar ao seu lado para te encher de abraços, beijos e sorrisos. Não estar perto de você me deixa um pouco frustrado, e eu fico triste por não conseguir fazer algo maior ou te dar um presente à altura do quanto você merece. Mas eu espero que essas palavras, simples, mas sinceras, consigam expressar o quanto você é especial para mim, são palavras que vem do fundo do meu coração.<br><br>
-      Nesse aniversário, quero que saiba o quanto sou grato por ter você na minha vida. Você é alguém com quem quero construir memórias, sonhos e momentos que durem para sempre. Eu adoro o jeito como você me faz sorrir, mesmo a distância, como torna meus dias mais leves e minha vida mais feliz.<br><br>
-      Que esse novo ano traga para você muita felicidade, saúde e realizações. Que você se sinta amada, valorizada e que todos os seus sonhos comecem a se tornar realidade. Eu prometo que, apesar da distância, sempre estarei aqui, do seu lado em pensamento e de coração.<br><br>
-      Parabéns, meu amor. Você é a melhor coisa que já aconteceu na minha vida, e eu te amo com tudo que sou.<br><br>
-    </p>
+  <div class="card-container">
+    <div class="card closed" id="card">
+      <h1>Feliz aniversário, minha gatinha</h1>
+      <p class="message" id="message">
+        Hoje é o seu dia, e como eu queria estar ao seu lado para te encher de abraços, beijos e sorrisos. Não estar perto de você me deixa um pouco frustrado, e eu fico triste por não conseguir fazer algo maior ou te dar um presente à altura do quanto você merece. Mas eu espero que essas palavras, simples, mas sinceras, consigam expressar o quanto você é especial para mim, são palavras que vem do fundo do meu coração.<br><br>
+        Nesse aniversário, quero que saiba o quanto sou grato por ter você na minha vida. Você é alguém com quem quero construir memórias, sonhos e momentos que durem para sempre. Eu adoro o jeito como você me faz sorrir, mesmo a distância, como torna meus dias mais leves e minha vida mais feliz.<br><br>
+        Que esse novo ano traga para você muita felicidade, saúde e realizações. Que você se sinta amada, valorizada e que todos os seus sonhos comecem a se tornar realidade. Eu prometo que, apesar da distância, sempre estarei aqui, do seu lado em pensamento e de coração.<br><br>
+        Parabéns, meu amor. Você é a melhor coisa que já aconteceu na minha vida, e eu te amo com tudo que sou.<br><br>
+      </p>
+    </div>
   </div>
 
-  <!-- Botão de música -->
+  <!-- Texto de instrução de play e botão de música -->
+  <div class="play-instructions">Clique aqui para dar play</div>
   <button class="play-button" onclick="playMusic()">▶</button>
 
   <!-- Elemento de áudio oculto -->
@@ -144,7 +184,14 @@
   <script>
     // Função para ativar o efeito dos balões e exibir a carta ao clicar
     document.body.addEventListener('click', function() {
-      document.body.classList.add('show-card');
+      const card = document.getElementById('card');
+      const message = document.getElementById('message');
+      card.classList.remove('closed');
+      card.classList.add('open');
+      message.style.display = 'block'; // Exibir a mensagem
+      setTimeout(() => {
+        message.style.opacity = '1'; // Gradualmente mostrar a mensagem
+      }, 1000); // Espera a animação da carta
     });
 
     // Função para tocar a música ao clicar no botão de música
