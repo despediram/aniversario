@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta de Aniversário</title>
+  <style>
+    /* Estilos gerais da página */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #fbeec1;
+      overflow: hidden;
+    }
+
+    /* Estilos do container da carta */
+    .card {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 2s ease;
+    }
+
+    /* Estilo do texto da carta */
+    .message {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 2s ease 1s;
+    }
+
+    /* Balões */
+    .balloons {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 50px;
+      height: 70px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      animation: rise 3s ease-out forwards;
+    }
+    .balloon:nth-child(2) { background-color: #ffd93d; animation-delay: 0.5s; }
+    .balloon:nth-child(3) { background-color: #6bcff6; animation-delay: 1s; }
+    .balloon:nth-child(4) { background-color: #ff8b94; animation-delay: 1.5s; }
+    .balloon:nth-child(5) { background-color: #c7b198; animation-delay: 2s; }
+
+    /* Animação dos balões */
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 0.8; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* Efeito de mostrar a carta ao clicar */
+    body.show-card .card {
+      transform: scaleY(1);
+    }
+
+    /* Efeito de mostrar o texto ao desenrolar a carta */
+    body.show-card .message {
+      opacity: 1;
+    }
+
+    /* Botão para voltar */
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 8px 12px;
+      background-color: #ff6b6b;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #ff4040;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botão para voltar à página inicial -->
+  <a href="index.html" class="back-button">Voltar</a>
+
+  <!-- Contêiner dos balões -->
+  <div class="balloons">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+  </div>
+
+  <!-- Contêiner da carta -->
+  <div class="card">
+    <h1>Feliz aniversário minha gatinha</h1>
+    <p class="message">
+      Hoje é o seu dia, e como eu queria estar ao seu lado para te encher de abraços, beijos e sorrisos. Não estar perto de você me deixa um pouco frustrado, e eu fico triste por não conseguir fazer algo maior ou te dar um presente à altura do quanto você merece. Mas eu espero que essas palavras, simples, mas sinceras, consigam expressar o quanto você é especial para mim, são palavras que vem do fundo do meu coração.
+
+Nesse aniversário, quero que saiba o quanto sou grato por ter você na minha vida. Você é alguém com quem quero construir memórias, sonhos e momentos que durem para sempre. Eu adoro o jeito como você me faz sorrir, mesmo a distância, como torna meus dias mais leves e minha vida mais feliz.
+
+Que esse novo ano traga para você muita felicidade, saúde e realizações. Que você se sinta amada, valorizada e que todos os seus sonhos comecem a se tornar realidade. Eu prometo que, apesar da distância, sempre estarei aqui, do seu lado em pensamento e de coração.
+
+Parabéns, meu amor. Você é a melhor coisa que já aconteceu na minha vida, e eu te amo com tudo que sou..<br><br>
+    </p>
+  </div>
+
+  <script>
+    // Função para ativar o efeito dos balões e desenrolar da carta ao clicar
+    document.body.addEventListener('click', function() {
+      document.body.classList.add('show-card');
+    });
+  </script>
+</body>
+</html>
