@@ -89,6 +89,25 @@
     .back-button:hover {
       background-color: #ff4040;
     }
+
+    /* Botão de música */
+    .play-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+    .play-button:hover {
+      background-color: #ff4040;
+    }
   </style>
 </head>
 <body>
@@ -116,11 +135,27 @@
     </p>
   </div>
 
+  <!-- Botão de música -->
+  <button class="play-button" onclick="playMusic()">▶</button>
+
+  <!-- Elemento de áudio oculto -->
+  <audio id="birthdayMusic" src="yellow.mp3"></audio>
+
   <script>
     // Função para ativar o efeito dos balões e exibir a carta ao clicar
     document.body.addEventListener('click', function() {
       document.body.classList.add('show-card');
     });
+
+    // Função para tocar a música ao clicar no botão de música
+    function playMusic() {
+      const audio = document.getElementById('birthdayMusic');
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
   </script>
 </body>
 </html>
